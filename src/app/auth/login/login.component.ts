@@ -10,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  user: any;
+  user: any = {};
   submitted: boolean = false;
   visible: boolean = false;
 
@@ -20,8 +20,10 @@ export class LoginComponent implements OnInit {
     private toastService: ToastrService
   ) {}
 
-  ngOnInit(): void {
-    this.user = {};
+  ngOnInit(): void {}
+
+  goToLandingPage() {
+    this.router.navigate(['home']);
   }
 
   login(invalid: any) {
@@ -33,8 +35,9 @@ export class LoginComponent implements OnInit {
     this.visible = true;
     this.authService.login(this.user).subscribe({
       next: (res) => {
-        AuthenticationUtil.saveToken(res.access_token);
-        this.router.navigate(['/dashboard']);
+        console.log(res);
+        AuthenticationUtil.saveToken(res.data.jwt);
+        this.router.navigate(['home']);
         this.visible = false;
       },
       error: (err) => {

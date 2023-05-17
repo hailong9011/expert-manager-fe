@@ -16,19 +16,19 @@ export class AuthenticationService {
 
   login(request: any): Observable<any> {
     const header: HttpHeaders = HeadersUtil.getHeaders();
-    let url = environment.mainUrl + '/login/';
+    let url = environment.apiMainUrl + '/auth/login';
     return this.http.post(url, request, { headers: header });
   }
 
   signup(request: any): Observable<any> {
     const header: HttpHeaders = HeadersUtil.getHeaders();
-    let url = environment.mainUrl + '/register/';
+    let url = environment.apiMainUrl + '/auth/signup';
     return this.http.post(url, request, { headers: header });
   }
 
   getUserInfo(request: any): Observable<any> {
     const header: HttpHeaders = HeadersUtil.getHeadersAuth();
-    let url = environment.mainUrl + '/staff/' + request + '/';
+    let url = environment.apiMainUrl + '/staff/' + request + '/';
     return this.http.get(url, { headers: header });
   }
 
@@ -40,7 +40,7 @@ export class AuthenticationService {
   checkCredentials() {
     if (!AuthenticationUtil.isLoggedIn()) {
       AuthenticationUtil.deleteAllCookie();
-      this.router.navigate(['/login']);
+      this.router.navigate(['/auth/login']);
       return false;
     }
     return true;
