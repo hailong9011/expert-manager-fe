@@ -90,22 +90,30 @@ export class SignUpComponent implements OnInit {
   }
 
   register() {
-    this.signUpForm = false;
+    this.authService.signup(this.user).subscribe({
+      next: (res) => {
+        Swal.fire({
+          title: 'Đăng ký thành công, vào email để xác thực !',
+          icon: 'success',
+          showCancelButton: true,
+          confirmButtonText: 'Yes',
+        }).then((result: any) => {
+          if (result.value) {
+            this.router.navigate(['/auth/login']);
+          } else {
+          }
+        });
+        this.signUpForm = false;
         this.certForm = true;
-    // this.authService.signup(this.user).subscribe({
-    //   next: (res) => {
-    //     this.toastService.success('Đăng ký thành công, hãy xác thực email !', 'Success');
-    //     this.signUpForm = false;
-    //     this.certForm = true;
-    //   },
-    //   error: (err) => {
-    //     if (err.internalStatus === CommonConstant.EXISTED) {
-    //       this.toastService.error('Email đã tồn tại', 'Error');
-    //     } else {
-    //       this.toastService.error('Có lỗi xảy ra', 'Error');
-    //     }
-    //   },
-    // });
+      },
+      error: (err) => {
+        if (err.internalStatus === CommonConstant.EXISTED) {
+          this.toastService.error('Email đã tồn tại', 'Error');
+        } else {
+          this.toastService.error('Có lỗi xảy ra', 'Error');
+        }
+      },
+    });
   }
 
   onVerifyEmail() {
