@@ -74,24 +74,34 @@
                     label="Đăng nhập"
                     (click)="login(myForm.invalid)"
                   ></p-button>
-
-                  <hr />
-
-                  <p-button
-                    label="Đăng nhập qua ví Metamask"
-                    styleClass="p-button-outlined"
-                  ></p-button>
                 </div>
 
-                <div class="row mb-3">
-                  <span class="text-center"
-                    >Bạn chưa có tài khoản ?
-                    <b
-                      ><a class="text-black" routerLink="/auth/sign-up"
-                        >Đăng ký</a
-                      ></b
-                    ></span
+                <hr />
+
+                <div class="mt-3 mb-3 d-grid">
+                  <a
+                    routerLink="/auth/sign-up"
+                    [queryParams]="{ role: 'expert' }"
                   >
+                    <p-button
+                      label="Đăng ký tài khoản chuyên gia"
+                      styleClass="p-button-outlined"
+                    >
+                    </p-button>
+                  </a>
+                </div>
+
+                <div class="mt-3 mb-3 d-grid">
+                  <a
+                    routerLink="/auth/sign-up"
+                    [queryParams]="{ role: 'user' }"
+                  >
+                    <p-button
+                      label="Đăng ký tài khoản tổ chức"
+                      styleClass="p-button-outlined"
+                    >
+                    </p-button>
+                  </a>
                 </div>
               </form>
             </div>

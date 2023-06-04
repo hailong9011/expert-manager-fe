@@ -15,7 +15,10 @@
               <p class="fw-bold fs-4">Lê Ngọc Ánh</p>
               <p class="fw-semibold">Phân tích mã độc, CEM Software</p>
               <p class="fw-light">Thanh Xuân, Hà Nội</p>
-              <p-button label="Gửi yêu cầu"></p-button>
+              <p-button
+                label="Gửi yêu cầu"
+                (click)="createRequest()"
+              ></p-button>
             </div>
             <div class="col-lg-3">
               <p><i class="fa-regular fa-clock"></i> 3 năm</p>
@@ -220,7 +223,7 @@
           <div class="row mb-3">
             <p class="fw-bold">Tên kĩ năng 1</p>
           </div>
-          
+
           <hr />
 
           <div class="row mb-3">
@@ -255,3 +258,108 @@
     </div>
   </div>
 </body>
+
+<p-dialog
+  header="Header"
+  [(visible)]="createRequestVisible"
+  [style]="{ width: '50vw' }"
+  [closable]="false"
+>
+  <ng-template pTemplate="header">
+    <div class="row mb-3">
+      <span class="text-center fs-3 mb-3"><b>Yêu cầu hợp tác dự án</b></span>
+      <span class="text-center"
+        >Hãy điền đầy đủ thông tin để chuyên gia có thể hiểu về dự án của
+        bạn</span
+      >
+    </div>
+  </ng-template>
+  <div class="row mb-3">
+    <div class="mb-3">
+      <label class="mb-2">Tên dự án</label>
+
+      <input type="text" class="form-control" placeholder="Nhập tên dự án" />
+    </div>
+
+    <div class="mb-3">
+      <label class="mb-2">Chuyên môn/ lĩnh vực</label>
+
+      <div>
+        <p-dropdown
+          [options]="specialityList"
+          optionLabel="name"
+          placeholder="Chọn chuyên môn"
+        ></p-dropdown>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="mb-2">Mổ tả chi tiết (JD)</label>
+      <div>
+        <p-fileUpload
+          mode="basic"
+          chooseLabel="Choose"
+          name="demo[]"
+          accept=".doc,.docx,.pdf"
+        ></p-fileUpload>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="mb-2">Mô tả bổ sung</label>
+      <div>
+        <textarea rows="5" style="width: 100%" pInputTextarea></textarea>
+      </div>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <p-button
+      (click)="createRequestVisible = false"
+      label="Gửi yêu cầu"
+    ></p-button>
+    <p-button
+      (click)="createRequestVisible = false"
+      styleClass="p-button-secondary"
+      label="Hủy"
+    ></p-button>
+  </ng-template>
+</p-dialog>
+
+<p-dialog
+  header="Thông tin dự án"
+  [(visible)]="haveRequest"
+  [style]="{ width: '50vw' }"
+>
+  <div class="row mb-3">
+    <div class="mb-3">
+      <span class="mb-2">Tên dự án: <b>Khôi phục dữ liệu server</b></span>
+    </div>
+
+    <div class="mb-3">
+      <span class="mb-2">Chuyên môn/ lĩnh vực: <b>Ứng cứu sự cố</b></span>
+    </div>
+
+    <div class="mb-3">
+      <span class="mb-2">Công ty/ tổ chức: <b>Công ty cổ phần Thudo Multimedia</b></span>
+    </div>
+
+    <div class="mb-3">
+      <span class="mb-2">Mổ tả chi tiết (JD)</span>
+    </div>
+
+    <div class="mb-3">
+      <span class="mb-2">Mô tả bổ sung: <b>Hoàn thành càng nhanh càng tốt.</b></span>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <p-button
+      (click)="createRequestVisible = false"
+      label="Chấp nhận"
+    ></p-button>
+    <p-button
+      (click)="createRequestVisible = false"
+      styleClass="p-button-outlined"
+      label="Từ chối"
+    ></p-button>
+  </ng-template>
+</p-dialog>

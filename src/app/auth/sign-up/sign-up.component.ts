@@ -38,40 +38,12 @@ export class SignUpComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = {};
-    this.metamaskService.createInstance();
-    console.log(this.metamaskService.checkConnect());
-
     this.role = this.route.snapshot.queryParams['role'];
     console.log(this.route.snapshot.queryParams['role']);
 
     this.genderOptions = [
       { label: 'Nam', value: 'Nam' },
       { label: 'Nữ', value: 'Nữ' },
-    ];
-    this.user.expWrk = [
-      {
-        1: 'long',
-        2: 'hehe',
-        3: 'hihi',
-      },
-      {
-        1: 'long',
-        2: 'hehe',
-        3: 'hihi',
-      },
-    ];
-
-    this.user.degree = [
-      {
-        1: 'long',
-        2: 'hehe',
-        3: 'hihi',
-      },
-      {
-        1: 'long',
-        2: 'hehe',
-        3: 'hihi',
-      },
     ];
   }
 

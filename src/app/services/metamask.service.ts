@@ -14,18 +14,21 @@ declare global {
   providedIn: 'root',
 })
 export class MetamaskService {
+  web3: any;
+
   constructor(private http: HttpClient) {}
 
-  createInstance() {
-    const provider = new Web3.providers.HttpProvider(environment.clientUrl);
-    const web3 = new Web3(provider);
+  async getAccount(): Promise<any> {
+    this.web3 = new Web3((window as any).ethereum);
+    const accounts = await this.web3.eth.getAccounts();
+    return accounts[0];
   }
 
   checkConnect() {
     if (typeof window.ethereum !== 'undefined') {
-      return false;
-    } else {
       return true;
+    } else {
+      return false;
     }
   }
 }
